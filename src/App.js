@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [activeGrids, setActiveGrids] = useState([]);
+
+	function handleClick(index) {
+		let temp = activeGrids;
+		if (!activeGrids.includes(index)) {
+			temp.push(index);
+		} else {
+			alert("Already selected");
+		}
+		if (activeGrids.length > 2) {
+			temp.shift();
+		}
+		setActiveGrids([...temp]);
+	}
+
+	return (
+		<div className="App">
+			<div className="grid-container">
+				{[...Array(16).keys()].map((index) => (
+					<div
+						key={Math.random()}
+						id={index}
+						onClick={() => {
+							handleClick(index);
+						}}
+						className={
+							activeGrids.includes(index)
+								? "grid-item active-grid"
+								: "grid-item"
+						}
+					></div>
+				))}
+			</div>
+		</div>
+	);
 }
 
 export default App;
