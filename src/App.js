@@ -19,7 +19,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1>namshi</h1>
+			<h1>namshi </h1>
 			<div className="grid-container">
 				{[...Array(16).keys()].map((index) => (
 					<div
